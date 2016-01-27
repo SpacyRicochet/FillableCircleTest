@@ -12,6 +12,9 @@
 		2343732F1C5842800048E38F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2343732D1C5842800048E38F /* Main.storyboard */; };
 		234373311C5842800048E38F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 234373301C5842800048E38F /* Assets.xcassets */; };
 		234373341C5842800048E38F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 234373321C5842800048E38F /* LaunchScreen.storyboard */; };
+		2343733F1C5843B00048E38F /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2343733B1C5843B00048E38F /* CircleView.swift */; };
+		234373411C5843B00048E38F /* FillAnimationCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2343733D1C5843B00048E38F /* FillAnimationCircleView.swift */; };
+		234373441C5844620048E38F /* CGRect+NWA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234373431C5844620048E38F /* CGRect+NWA.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		234373301C5842800048E38F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		234373331C5842800048E38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		234373351C5842800048E38F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2343733B1C5843B00048E38F /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		2343733D1C5843B00048E38F /* FillAnimationCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillAnimationCircleView.swift; sourceTree = "<group>"; };
+		234373431C5844620048E38F /* CGRect+NWA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+NWA.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,9 @@
 		234373281C5842800048E38F /* FillingCircleTestProject */ = {
 			isa = PBXGroup;
 			children = (
+				2343733B1C5843B00048E38F /* CircleView.swift */,
+				2343733D1C5843B00048E38F /* FillAnimationCircleView.swift */,
+				234373431C5844620048E38F /* CGRect+NWA.swift */,
 				234373291C5842800048E38F /* AppDelegate.swift */,
 				2343732B1C5842800048E38F /* ViewController.swift */,
 				2343732D1C5842800048E38F /* Main.storyboard */,
@@ -135,8 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2343733F1C5843B00048E38F /* CircleView.swift in Sources */,
 				2343732C1C5842800048E38F /* ViewController.swift in Sources */,
 				2343732A1C5842800048E38F /* AppDelegate.swift in Sources */,
+				234373441C5844620048E38F /* CGRect+NWA.swift in Sources */,
+				234373411C5843B00048E38F /* FillAnimationCircleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,17 +9,40 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var circle: FillAnimationCircleView!
+    
+    @IBAction func pressed(longPress: UILongPressGestureRecognizer) {
+        print("Selfie pressed")
+        
+        let location = longPress.locationInView(view)
+        
+        switch longPress.state {
+        case .Possible:
+            beginActiveAnimation(withLocation: location)
+        case .Began:
+            beginActiveAnimation(withLocation: location)
+        case .Changed:
+            continueActiveAnimation(withLocation: location)
+        case .Ended:
+            endActiveAnimation()
+        case .Cancelled:
+            endActiveAnimation()
+        case .Failed:
+            endActiveAnimation()
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: - Animations
+    
+    private func beginActiveAnimation(withLocation location: CGPoint) {
+        circle.beginAnimation()
     }
-
-
+    
+    private func continueActiveAnimation(withLocation location: CGPoint) {
+    }
+    
+    private func endActiveAnimation() {
+        circle.reverseAnimation()
+    }
 }
 
