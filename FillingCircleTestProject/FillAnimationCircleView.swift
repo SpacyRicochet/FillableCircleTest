@@ -63,6 +63,7 @@ class FillAnimationCircleView : CircleView {
     var animationTimer: NSTimer? = nil
     
     func beginAnimation() {
+        print("Begin animation")
         if fillShapeLayer == nil {
             fillShapeLayer = constructFillShapeLayer()
         }
@@ -79,6 +80,7 @@ class FillAnimationCircleView : CircleView {
     }
     
     func reverseAnimation() {
+        print("Reverse animation")
         guard let fillAnimationLayer = fillShapeLayer, let _ = fillAnimationLayer.animationForKey("animation") else {
             print("Animation not found")
             return
@@ -104,6 +106,9 @@ class FillAnimationCircleView : CircleView {
             print("Animation not found")
             return
         }
+        
+        animationTimer?.invalidate()
+        animationTimer = nil
         
         let timeOffset = maximumDuration * percentage
         print("Set animation to percentage \(percentage) with timeOffset: \(timeOffset)")

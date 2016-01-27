@@ -17,13 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ba-Nq-zG9" customClass="FillAnimationCircleView" customModule="FillingCircleTestProject" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ba-Nq-zG9" customClass="FillAnimationCircleView" customModule="FillingCircleTestProject" customModuleProvider="target">
                                 <rect key="frame" x="150" y="150" width="300" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="9ea-zR-z3b"/>
                                     <constraint firstAttribute="width" constant="300" id="Ise-q9-a5t"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ftN-Ui-gJP" appends="YES" id="Tpw-Fg-Zee"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRd-jI-I2S">
                                 <rect key="frame" x="150" y="472" width="300" height="60"/>
@@ -50,18 +54,15 @@
                             <constraint firstItem="2ba-Nq-zG9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m9F-YE-Kkv"/>
                             <constraint firstItem="aRd-jI-I2S" firstAttribute="top" secondItem="2ba-Nq-zG9" secondAttribute="bottom" constant="22" id="sMx-CB-CFU"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="VLI-se-yJ7" appends="YES" id="6Dl-Ql-QId"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="circle" destination="2ba-Nq-zG9" id="TYo-od-tzr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.0" id="VLI-se-yJ7">
+                <pongPressGestureRecognizer delaysTouchesEnded="NO" allowableMovement="10" minimumPressDuration="0.0" id="ftN-Ui-gJP">
                     <connections>
-                        <action selector="pressed:" destination="BYZ-38-t0r" id="RNd-SI-xAC"/>
+                        <action selector="pressed:" destination="BYZ-38-t0r" id="XXR-Kj-hbc"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
