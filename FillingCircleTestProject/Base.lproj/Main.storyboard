@@ -59,7 +59,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="VLI-se-yJ7">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.0" id="VLI-se-yJ7">
                     <connections>
                         <action selector="pressed:" destination="BYZ-38-t0r" id="RNd-SI-xAC"/>
                     </connections>
