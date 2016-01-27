@@ -32,20 +32,16 @@ class FillAnimationCircleView : CircleView {
         let startPath = CGPathCreateWithEllipseInRect(CGRect.circleFrame(withCenter: bounds.center, radius: 2), nil)
         let endPath = CGPathCreateWithEllipseInRect(bounds, nil)
         
-        let emptyAnimation = CABasicAnimation(keyPath: "path")
-        emptyAnimation.fromValue = startPath
-        emptyAnimation.toValue = endPath
-        
-        let animation = CAKeyframeAnimation(keyPath: "path")
-        animation.values = [startPath, endPath, startPath]
-        animation.keyTimes = [NSNumber(double: 0.0), NSNumber(double: 0.5), NSNumber(double: 1.0)]
-        animation.duration = 2.0
-        animation.removedOnCompletion = false
+        let basicAnimation = CABasicAnimation(keyPath: "path")
+        basicAnimation.fromValue = startPath
+        basicAnimation.toValue = endPath
+        basicAnimation.duration = 5.0
+        basicAnimation.removedOnCompletion = false
         
         let shape = CAShapeLayer()
         shape.speed = 0
         shape.timeOffset = 0
-        shape.addAnimation(animation, forKey: "animation")
+        shape.addAnimation(basicAnimation, forKey: "animation")
         
         layer.addSublayer(shape)
         
@@ -61,6 +57,13 @@ class FillAnimationCircleView : CircleView {
     }
     
     func reverseAnimation() {
-        self.fillAnimationLayer?.speed = -1.0
+        guard let fillAnimationLayer = fillAnimationLayer, let _ = fillAnimationLayer.animationForKey("animation") else {
+            print("Animation not found")
+            return
+        }
+        
+        let pausedTime = fillAnimationLayer.convertTime(CACurrentMediaTime(), fromLayer: nil)
+        fillAnimationLayer.speed = 0
+        layer.timeOffset = pausedTime
     }
 }
