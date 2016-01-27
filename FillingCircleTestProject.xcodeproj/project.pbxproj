@@ -15,6 +15,7 @@
 		2343733F1C5843B00048E38F /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2343733B1C5843B00048E38F /* CircleView.swift */; };
 		234373411C5843B00048E38F /* FillAnimationCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2343733D1C5843B00048E38F /* FillAnimationCircleView.swift */; };
 		234373441C5844620048E38F /* CGRect+NWA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234373431C5844620048E38F /* CGRect+NWA.swift */; };
+		234373461C58D7A10048E38F /* NSTimer+NWA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234373451C58D7A10048E38F /* NSTimer+NWA.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2343733B1C5843B00048E38F /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		2343733D1C5843B00048E38F /* FillAnimationCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillAnimationCircleView.swift; sourceTree = "<group>"; };
 		234373431C5844620048E38F /* CGRect+NWA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+NWA.swift"; sourceTree = "<group>"; };
+		234373451C58D7A10048E38F /* NSTimer+NWA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimer+NWA.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				2343733B1C5843B00048E38F /* CircleView.swift */,
 				2343733D1C5843B00048E38F /* FillAnimationCircleView.swift */,
 				234373431C5844620048E38F /* CGRect+NWA.swift */,
+				234373451C58D7A10048E38F /* NSTimer+NWA.swift */,
 				234373291C5842800048E38F /* AppDelegate.swift */,
 				2343732B1C5842800048E38F /* ViewController.swift */,
 				2343732D1C5842800048E38F /* Main.storyboard */,
@@ -144,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				234373461C58D7A10048E38F /* NSTimer+NWA.swift in Sources */,
 				2343733F1C5843B00048E38F /* CircleView.swift in Sources */,
 				2343732C1C5842800048E38F /* ViewController.swift in Sources */,
 				2343732A1C5842800048E38F /* AppDelegate.swift in Sources */,
@@ -296,6 +300,7 @@
 				2343733A1C5842800048E38F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

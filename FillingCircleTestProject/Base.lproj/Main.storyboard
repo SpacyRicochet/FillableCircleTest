@@ -25,15 +25,33 @@
                                     <constraint firstAttribute="width" constant="300" id="Ise-q9-a5t"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRd-jI-I2S">
+                                <rect key="frame" x="150" y="472" width="300" height="60"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZKe-Cy-vkY">
+                                        <rect key="frame" x="-2" y="15" width="304" height="31"/>
+                                        <connections>
+                                            <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="crf-Zo-JYW"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="KDN-ZZ-3bo"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="aRd-jI-I2S" firstAttribute="width" secondItem="2ba-Nq-zG9" secondAttribute="width" id="Jnl-nH-pXw"/>
                             <constraint firstItem="2ba-Nq-zG9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QSt-Zc-jUw"/>
+                            <constraint firstItem="aRd-jI-I2S" firstAttribute="centerX" secondItem="2ba-Nq-zG9" secondAttribute="centerX" id="YRk-UU-zcv"/>
                             <constraint firstItem="2ba-Nq-zG9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m9F-YE-Kkv"/>
+                            <constraint firstItem="aRd-jI-I2S" firstAttribute="top" secondItem="2ba-Nq-zG9" secondAttribute="bottom" constant="22" id="sMx-CB-CFU"/>
                         </constraints>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="wVj-1u-uTe" appends="YES" id="SgP-tH-Och"/>
+                            <outletCollection property="gestureRecognizers" destination="VLI-se-yJ7" appends="YES" id="6Dl-Ql-QId"/>
                         </connections>
                     </view>
                     <connections>
@@ -41,12 +59,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer delaysTouchesEnded="NO" allowableMovement="10" minimumPressDuration="0.0" id="wVj-1u-uTe">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="VLI-se-yJ7">
                     <connections>
-                        <action selector="pressed:" destination="BYZ-38-t0r" id="rUE-6n-saR"/>
+                        <action selector="pressed:" destination="BYZ-38-t0r" id="RNd-SI-xAC"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="305" y="264"/>
         </scene>
     </scenes>
 </document>
