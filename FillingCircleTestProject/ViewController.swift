@@ -12,8 +12,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var circle: FillAnimationCircleView!
     
     @IBAction func pressed(longPress: UILongPressGestureRecognizer) {
-        print("Selfie pressed")
-        
         let location = longPress.locationInView(view)
         
         switch longPress.state {
