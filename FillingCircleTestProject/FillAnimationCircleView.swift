@@ -70,11 +70,11 @@ class FillAnimationCircleView : CircleView {
         
         animationTimer?.invalidate()
         animationTimer = NSTimer.schedule(interval: 0.1, repeats: true, block: { [unowned self] () -> Void in
-            if self.layer.timeOffset >= 1.0 {
-                self.layer.timeOffset = self.maximumDuration
+            if self.fillShapeLayer?.timeOffset >= 1.0 {
+                self.fillShapeLayer?.timeOffset = self.maximumDuration
             }
             else {
-                self.layer.timeOffset += 0.1
+                self.fillShapeLayer?.timeOffset += 0.1
             }
         })
     }
@@ -88,11 +88,11 @@ class FillAnimationCircleView : CircleView {
         
         animationTimer?.invalidate()
         animationTimer = NSTimer.schedule(interval: 0.1, repeats: true, block: { [unowned self] () -> Void in
-            if self.layer.timeOffset <= 0.0 {
-                self.layer.timeOffset = 0.0
+            if self.fillShapeLayer?.timeOffset <= 0.0 {
+                self.fillShapeLayer?.timeOffset = 0.0
             }
             else {
-                self.layer.timeOffset -= 0.1
+                self.fillShapeLayer?.timeOffset -= 0.1
             }
         })
     }
