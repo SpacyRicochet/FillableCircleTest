@@ -10,6 +10,8 @@ import UIKit
 class FillAnimationCircleView : CircleView {
     
     let maximumDuration = 5.0
+    var _startPath: AnyObject? = nil
+    var _endPath: AnyObject? = nil
     
     override var activeColor: UIColor {
         didSet {
@@ -32,24 +34,40 @@ class FillAnimationCircleView : CircleView {
     // Inspiration from:
     // https://github.com/mattneub/Programming-iOS-Book-Examples/blob/master/bk2ch04p160frozenAnimation/FrozenAnimationTest/ViewController.swift
     func constructFillShapeLayer() -> CAShapeLayer {
-        let startPath = CGPathCreateWithEllipseInRect(CGRect.circleFrame(withCenter: bounds.center, radius: 10), nil)
-        let endPath = CGPathCreateWithEllipseInRect(bounds, nil)
+        _startPath = CGPathCreateWithEllipseInRect(CGRect.circleFrame(withCenter: bounds.center, radius: 10), nil)
+        _endPath = CGPathCreateWithEllipseInRect(bounds, nil)
         
         let shape = CAShapeLayer()
-        shape.speed = 0
-        shape.timeOffset = 0
+//        shape.speed = 0
+//        shape.timeOffset = 0
         layer.addSublayer(shape)
         
-        
+        return shape
+    }
+    
+    func setAnimation(layer: CAShapeLayer, startPath: AnyObject, endPath: AnyObject, duration: Double, timeOffset: Double)
+    {
+        let time = layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
+        let begintime = layer.beginTime
+        var diff = 0.0
+        if begintime > 0
+        {
+            diff = begintime - time
+        }
+        if let animation = layer.animationForKey("animation")
+        {
+            print(animation)
+            layer.removeAnimationForKey("amimation")
+        }
         let basicAnimation = CABasicAnimation(keyPath: "path")
         basicAnimation.fromValue = startPath
         basicAnimation.toValue = endPath
         basicAnimation.duration = maximumDuration
         basicAnimation.removedOnCompletion = false
         basicAnimation.delegate = self
-        shape.addAnimation(basicAnimation, forKey: "animation")
-        
-        return shape
+        basicAnimation.beginTime = diff
+        basicAnimation.speed = 1.0
+        layer.addAnimation(basicAnimation, forKey: "animation")
     }
     
     override func animationDidStart(anim: CAAnimation) {
@@ -60,7 +78,6 @@ class FillAnimationCircleView : CircleView {
         print("Stopped animation \(anim) with finished \(flag)")
     }
     
-    var animationTimer: NSTimer? = nil
     
     func beginAnimation() {
         print("Begin animation")
@@ -68,51 +85,18 @@ class FillAnimationCircleView : CircleView {
             fillShapeLayer = constructFillShapeLayer()
         }
         
-        animationTimer?.invalidate()
-        animationTimer = NSTimer.schedule(interval: 0.1, repeats: true, block: { [unowned self] () -> Void in
-            if self.fillShapeLayer?.timeOffset >= 1.0 {
-                self.fillShapeLayer?.timeOffset = self.maximumDuration
-            }
-            else {
-                self.fillShapeLayer?.timeOffset += 0.1
-            }
-        })
+        let offset = fillShapeLayer!.timeOffset
+//        let reverse = maximumDuration - offset
+
+        setAnimation(fillShapeLayer!, startPath: _startPath!, endPath: _endPath!, duration: maximumDuration, timeOffset: offset)
     }
     
     func reverseAnimation() {
         print("Reverse animation")
-        guard let fillAnimationLayer = fillShapeLayer, let _ = fillAnimationLayer.animationForKey("animation") else {
-            print("Animation not found")
-            return
-        }
+        let offset = fillShapeLayer!.convertTime(CACurrentMediaTime(), fromLayer: nil)
+        let reverse = maximumDuration - offset
         
-        animationTimer?.invalidate()
-        animationTimer = NSTimer.schedule(interval: 0.1, repeats: true, block: { [unowned self] () -> Void in
-            if self.fillShapeLayer?.timeOffset <= 0.0 {
-                self.fillShapeLayer?.timeOffset = 0.0
-            }
-            else {
-                self.fillShapeLayer?.timeOffset -= 0.1
-            }
-        })
+        setAnimation(fillShapeLayer!, startPath: _endPath!, endPath: _startPath!, duration: maximumDuration, timeOffset: reverse)
     }
     
-    func animationTimeOffsetToPercentage(percentage: Double) {
-        if fillShapeLayer == nil {
-            fillShapeLayer = constructFillShapeLayer()
-        }
-        
-        guard let fillAnimationLayer = fillShapeLayer, let _ = fillAnimationLayer.animationForKey("animation") else {
-            print("Animation not found")
-            return
-        }
-        
-        animationTimer?.invalidate()
-        animationTimer = nil
-        
-        let timeOffset = maximumDuration * percentage
-        print("Set animation to percentage \(percentage) with timeOffset: \(timeOffset)")
-        
-        fillAnimationLayer.timeOffset = timeOffset
-    }
 }
