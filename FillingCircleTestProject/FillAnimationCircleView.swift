@@ -34,6 +34,8 @@ class FillAnimationCircleView : CircleView {
     
     // Inspiration from:
     // https://github.com/mattneub/Programming-iOS-Book-Examples/blob/master/bk2ch04p160frozenAnimation/FrozenAnimationTest/ViewController.swift
+    // http://ronnqvi.st/controlling-animation-timing/
+    // https://developer.apple.com/library/ios/qa/qa1673/_index.html#//apple_ref/doc/uid/DTS40010053
     func constructFillShapeLayer() -> CAShapeLayer {
         startPath = CGPathCreateWithEllipseInRect(CGRect.circleFrame(withCenter: bounds.center, radius: 0), nil)
         endPath = CGPathCreateWithEllipseInRect(bounds, nil)
