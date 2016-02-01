@@ -42,9 +42,4 @@ class ViewController: UIViewController {
     private func endActiveAnimation() {
         circle.reverseAnimation()
     }
-    
-    @IBAction func sliderChanged(sender: UISlider) {
-        circle.animationTimeOffsetToPercentage(Double(sender.value))
-    }
 }
-

@@ -15,10 +15,7 @@ extension CGRect {
     var center: CGPoint {
         return CGPoint(x: size.width / 2.0 + origin.x, y: size.height / 2.0 + origin.y)
     }
-}
-
-/// Extends CGRect to provide Bubbl-specific calculations that are useful in multiple classes.
-extension CGRect {
+    
     /// Returns the frame for a circle with the given radius and center.
     static func circleFrame(withCenter center: CGPoint, radius: CGFloat) -> CGRect {
         let x = center.x - radius
