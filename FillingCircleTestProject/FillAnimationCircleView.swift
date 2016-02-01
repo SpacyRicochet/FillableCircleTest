@@ -9,10 +9,12 @@ import UIKit
 
 class FillAnimationCircleView : CircleView {
     
-    let maximumDuration = 5.0
-    var _startPath: AnyObject? = nil
-    var _endPath: AnyObject? = nil
+    let maximumDuration = 0.5
     
+    var startPath: AnyObject? = nil
+    var endPath: AnyObject? = nil
+    var startTime: CFTimeInterval = 0.0
+
     override var activeColor: UIColor {
         didSet {
             guard let fillShapeLayer = fillShapeLayer else { return }
@@ -29,74 +31,68 @@ class FillAnimationCircleView : CircleView {
     // MARK: - Animation
     
     var fillShapeLayer: CAShapeLayer?
-    var fillAnimation:  CAAnimation?
     
     // Inspiration from:
     // https://github.com/mattneub/Programming-iOS-Book-Examples/blob/master/bk2ch04p160frozenAnimation/FrozenAnimationTest/ViewController.swift
     func constructFillShapeLayer() -> CAShapeLayer {
-        _startPath = CGPathCreateWithEllipseInRect(CGRect.circleFrame(withCenter: bounds.center, radius: 10), nil)
-        _endPath = CGPathCreateWithEllipseInRect(bounds, nil)
+        startPath = CGPathCreateWithEllipseInRect(CGRect.circleFrame(withCenter: bounds.center, radius: 0), nil)
+        endPath = CGPathCreateWithEllipseInRect(bounds, nil)
         
         let shape = CAShapeLayer()
-//        shape.speed = 0
-//        shape.timeOffset = 0
         layer.addSublayer(shape)
         
         return shape
     }
     
-    func setAnimation(layer: CAShapeLayer, startPath: AnyObject, endPath: AnyObject, duration: Double, timeOffset: Double)
+    func setAnimation(layer: CAShapeLayer, startPath: AnyObject, endPath: AnyObject, duration: Double)
     {
-        let time = layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
-        let begintime = layer.beginTime
-        var diff = 0.0
-        if begintime > 0
-        {
-            diff = begintime - time
+        // Always create a new animation.
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "path")
+        
+        if let currentAnimation = layer.animationForKey("animation") as? CABasicAnimation {
+            // If an animation exists, reverse it.
+            animation.fromValue = currentAnimation.toValue
+            animation.toValue = currentAnimation.fromValue
+            
+            let pauseTime = layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
+            // For the timeSinceStart, we take the minimum from the duration or the time passed. 
+            // If not, holding the animation longer than its duration would cause a delay in the reverse animation.
+            let timeSinceStart = min(pauseTime - startTime, currentAnimation.duration)
+            
+            // Now convert for the reverse animation.
+            let reversePauseTime = currentAnimation.duration - timeSinceStart
+            animation.beginTime = pauseTime - reversePauseTime
+            
+            // Remove the old animation
+            layer.removeAnimationForKey("animation")
+            // Reset startTime, to be when the reverse WOULD HAVE started.
+            startTime = animation.beginTime
         }
-        if let animation = layer.animationForKey("animation")
-        {
-            print(animation)
-            layer.removeAnimationForKey("amimation")
+        else {
+            // This happens when there is no current animation happening.
+            startTime = layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
+            
+            animation.fromValue = startPath
+            animation.toValue = endPath
         }
-        let basicAnimation = CABasicAnimation(keyPath: "path")
-        basicAnimation.fromValue = startPath
-        basicAnimation.toValue = endPath
-        basicAnimation.duration = maximumDuration
-        basicAnimation.removedOnCompletion = false
-        basicAnimation.delegate = self
-        basicAnimation.beginTime = diff
-        basicAnimation.speed = 1.0
-        layer.addAnimation(basicAnimation, forKey: "animation")
+        
+        animation.duration = duration
+        animation.fillMode = kCAFillModeForwards
+        animation.removedOnCompletion = false
+        
+        layer.addAnimation(animation, forKey: "animation")
     }
-    
-    override func animationDidStart(anim: CAAnimation) {
-        print("Started animation \(anim)")
-    }
-    
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        print("Stopped animation \(anim) with finished \(flag)")
-    }
-    
     
     func beginAnimation() {
         print("Begin animation")
         if fillShapeLayer == nil {
             fillShapeLayer = constructFillShapeLayer()
         }
-        
-        let offset = fillShapeLayer!.timeOffset
-//        let reverse = maximumDuration - offset
-
-        setAnimation(fillShapeLayer!, startPath: _startPath!, endPath: _endPath!, duration: maximumDuration, timeOffset: offset)
+        setAnimation(fillShapeLayer!, startPath: startPath!, endPath: endPath!, duration: maximumDuration)
     }
     
     func reverseAnimation() {
         print("Reverse animation")
-        let offset = fillShapeLayer!.convertTime(CACurrentMediaTime(), fromLayer: nil)
-        let reverse = maximumDuration - offset
-        
-        setAnimation(fillShapeLayer!, startPath: _endPath!, endPath: _startPath!, duration: maximumDuration, timeOffset: reverse)
+        setAnimation(fillShapeLayer!, startPath: endPath!, endPath: startPath!, duration: maximumDuration)
     }
-    
 }
