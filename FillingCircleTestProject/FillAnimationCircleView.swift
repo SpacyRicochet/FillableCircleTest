@@ -4,6 +4,9 @@
 //  Created by Bruno Scheele on 26/01/16.
 //  Copyright © 2016 Noodlewerk Apps. All rights reserved.
 //
+// Inspiration from:
+// http://ronnqvi.st/controlling-animation-timing/
+// https://developer.apple.com/library/ios/qa/qa1673/_index.html#//apple_ref/doc/uid/DTS40010053
 
 import UIKit
 
@@ -32,10 +35,6 @@ class FillAnimationCircleView : CircleView {
     
     var fillShapeLayer: CAShapeLayer?
     
-    // Inspiration from:
-    // https://github.com/mattneub/Programming-iOS-Book-Examples/blob/master/bk2ch04p160frozenAnimation/FrozenAnimationTest/ViewController.swift
-    // http://ronnqvi.st/controlling-animation-timing/
-    // https://developer.apple.com/library/ios/qa/qa1673/_index.html#//apple_ref/doc/uid/DTS40010053
     func constructFillShapeLayer() -> CAShapeLayer {
         startPath = CGPathCreateWithEllipseInRect(CGRect.circleFrame(withCenter: bounds.center, radius: 0), nil)
         endPath = CGPathCreateWithEllipseInRect(bounds, nil)
@@ -95,6 +94,6 @@ class FillAnimationCircleView : CircleView {
     
     func reverseAnimation() {
         print("Reverse animation")
-        setAnimation(fillShapeLayer!, startPath: endPath!, endPath: startPath!, duration: maximumDuration)
+        setAnimation(fillShapeLayer!, startPath: startPath!, endPath: endPath!, duration: maximumDuration)
     }
 }
