@@ -70,7 +70,7 @@ class FillAnimationCircleView : CircleView {
             startTime = animation.beginTime
         }
         else {
-            // This happens when there is no current animation happening.
+            // This happens when there is no current animation.
             startTime = layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
             
             animation.fromValue = startPath
@@ -78,8 +78,8 @@ class FillAnimationCircleView : CircleView {
         }
         
         animation.duration = duration
-        animation.fillMode = kCAFillModeForwards
-        animation.removedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards // These lines are important to keep the animation at its final frame.
+        animation.removedOnCompletion = false    // If not, the animation would remove itself before showing a reverse.
         
         layer.addAnimation(animation, forKey: "animation")
     }
